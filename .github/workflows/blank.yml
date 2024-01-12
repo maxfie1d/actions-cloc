@@ -44,7 +44,7 @@ jobs:
                   { data: "comment", header: true },
                   { data: "code", header: true },
                 ];
-            const otherRows = series.map(x => [x.language, x.nFiles.toString(), x.blank, x.comment, x.code]);
+            const otherRows = series.map(x => [x.language, x.nFiles.toString(), x.blank.toString(), x.comment.toString(), x.code.toString()]);
             const allRows = [headerRow, ...otherRows];
             summary.addTable(allRows);
             summary.write();
