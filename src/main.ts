@@ -1,5 +1,6 @@
 import * as core from '@actions/core'
 import * as exec from '@actions/exec'
+import { DefaultArtifactClient } from '@actions/artifact'
 import * as fs from 'fs'
 
 export async function run(): Promise<void> {
@@ -20,6 +21,7 @@ export async function run(): Promise<void> {
     }
   })
 
+  // Generate summary
   const summary = core.summary
   summary.addHeading('cloc')
   const headerRow = [
@@ -39,4 +41,17 @@ export async function run(): Promise<void> {
   const allRows = [headerRow, ...otherRows]
   summary.addTable(allRows)
   summary.write()
+
+  // Upload result as artifact
+  const uploadArtifact = core.getBooleanInput('artifact')
+  if (uploadArtifact) {
+    const artifact = new DefaultArtifactClient()
+    const { id, size } = await artifact.uploadArtifact(
+      'cloc-output',
+      ['./cloc-output.json'],
+      '.'
+    )
+
+    console.log(`Created artifact with id: ${id} (bytes: ${size})`)
+  }
 }

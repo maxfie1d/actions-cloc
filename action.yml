@@ -10,3 +10,9 @@ branding:
 runs:
   using: node20
   main: dist/index.js
+
+inputs:
+  artifact:
+    description: 'Upload artifact'
+    required: false
+    default: false
