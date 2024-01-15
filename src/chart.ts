@@ -4,7 +4,10 @@ export function buildMermaidPieChart(
   title: string,
   stats: LanguageStats[]
 ): string {
-  return `pie title ${title}
-  ${stats.map(x => `    "${x.language}" : ${x.code}`).join('\n')}
+  return `pie showData title ${title}
+  ${stats
+    .filter(x => x.language !== 'SUM')
+    .map(x => `    "${x.language}" : ${x.code}`)
+    .join('\n')}
   `
 }
