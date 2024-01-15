@@ -99580,9 +99580,12 @@ async function run() {
     summary.addTable(allRows);
     summary.write();
     // Upload result as artifact
-    const artifact = new artifact_1.DefaultArtifactClient();
-    const { id, size } = await artifact.uploadArtifact('cloc-output', ['./cloc-output.json'], '.');
-    console.log(`Created artifact with id: ${id} (bytes: ${size}`);
+    const uploadArtifact = core.getBooleanInput('artifact');
+    if (uploadArtifact) {
+        const artifact = new artifact_1.DefaultArtifactClient();
+        const { id, size } = await artifact.uploadArtifact('cloc-output', ['./cloc-output.json'], '.');
+        console.log(`Created artifact with id: ${id} (bytes: ${size})`);
+    }
 }
 exports.run = run;
 
