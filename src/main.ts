@@ -45,7 +45,7 @@ export async function run(): Promise<void> {
   const allRows = [headerRow, ...otherRows]
   summary.addTable(allRows)
 
-  const chart = buildMermaidPieChart('cloc', series)
+  const chart = buildMermaidPieChart('LOC', series)
   summary.addCodeBlock(chart, 'mermaid')
 
   summary.write()

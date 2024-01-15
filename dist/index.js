@@ -99599,7 +99599,7 @@ async function run() {
     ]);
     const allRows = [headerRow, ...otherRows];
     summary.addTable(allRows);
-    const chart = (0, chart_1.buildMermaidPieChart)('cloc', series);
+    const chart = (0, chart_1.buildMermaidPieChart)('LOC', series);
     summary.addCodeBlock(chart, 'mermaid');
     summary.write();
     // Upload result as artifact
