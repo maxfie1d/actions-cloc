@@ -1,0 +1,12 @@
+name: 'actions-cloc'
+description: 'Run cloc on GitHub Actions'
+author: 'maxfie1d'
+
+# Add your action's branding here. This will appear on the GitHub Marketplace.
+branding:
+  icon: 'heart'
+  color: 'red'
+
+runs:
+  using: node20
+  main: dist/index.js
