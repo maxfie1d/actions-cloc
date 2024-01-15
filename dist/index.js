@@ -99519,7 +99519,7 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.buildMermaidPieChart = void 0;
 function buildMermaidPieChart(title, stats) {
     return `pie title ${title}
-  ${stats.map(x => `    "${x.language}" : ${x.code}`).join(',\n')}
+  ${stats.map(x => `    "${x.language}" : ${x.code}`).join('\n')}
   `;
 }
 exports.buildMermaidPieChart = buildMermaidPieChart;
