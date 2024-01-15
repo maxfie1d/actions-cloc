@@ -1,6 +1,6 @@
 export type ClocOutput = { header: Header } & LanguageStatsList
 
-type LanguageStatsList = Record<string, LanguageStats>
+type LanguageStatsList = Record<string, RawLanguageStats>
 
 type Header = {
   cloc_url: string
@@ -12,9 +12,11 @@ type Header = {
   lines_per_second: number
 }
 
-type LanguageStats = {
+type RawLanguageStats = {
   nFiles: number
   blank: number
   comment: number
   code: number
 }
+
+export type LanguageStats = { language: string } & RawLanguageStats

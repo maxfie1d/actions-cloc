@@ -1,8 +1,9 @@
 import * as core from '@actions/core'
 import * as exec from '@actions/exec'
 import { DefaultArtifactClient } from '@actions/artifact'
-import { ClocOutput } from './cloc'
+import { ClocOutput, LanguageStats } from './cloc'
 import * as fs from 'fs'
+import { buildMermaidPieChart } from './chart'
 
 export async function run(): Promise<void> {
   await exec.exec('sudo apt', ['install', '-y', 'cloc'])
@@ -21,7 +22,7 @@ export async function run(): Promise<void> {
       blank: metric.blank,
       comment: metric.comment,
       code: metric.code
-    }
+    } as LanguageStats
   })
 
   // Generate summary
@@ -43,6 +44,10 @@ export async function run(): Promise<void> {
   ])
   const allRows = [headerRow, ...otherRows]
   summary.addTable(allRows)
+
+  const chart = buildMermaidPieChart('cloc', series)
+  summary.addCodeBlock(chart, 'mermaid')
+
   summary.write()
 
   // Upload result as artifact
