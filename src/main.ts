@@ -1,13 +1,16 @@
 import * as core from '@actions/core'
 import * as exec from '@actions/exec'
 import { DefaultArtifactClient } from '@actions/artifact'
+import { ClocOutput } from './cloc'
 import * as fs from 'fs'
 
 export async function run(): Promise<void> {
   await exec.exec('sudo apt', ['install', '-y', 'cloc'])
   await exec.exec('cloc', ['--vcs=git', '--json', '--out=cloc-output.json'])
 
-  const clocResult = JSON.parse(fs.readFileSync('./cloc-output.json', 'utf8'))
+  const clocResult = JSON.parse(
+    fs.readFileSync('./cloc-output.json', 'utf8')
+  ) as ClocOutput
 
   const keys = Object.keys(clocResult).filter(x => x !== 'header')
   const series = keys.map(key => {
@@ -33,10 +36,10 @@ export async function run(): Promise<void> {
   ]
   const otherRows = series.map(x => [
     x.language,
-    x.nFiles.toString(),
-    x.blank.toString(),
-    x.comment.toString(),
-    x.code.toString()
+    x.nFiles.toLocaleString(),
+    x.blank.toLocaleString(),
+    x.comment.toLocaleString(),
+    x.code.toLocaleString()
   ])
   const allRows = [headerRow, ...otherRows]
   summary.addTable(allRows)
