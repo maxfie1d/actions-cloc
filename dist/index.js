@@ -99571,10 +99571,10 @@ async function run() {
     ];
     const otherRows = series.map(x => [
         x.language,
-        x.nFiles.toString(),
-        x.blank.toString(),
-        x.comment.toString(),
-        x.code.toString()
+        x.nFiles.toLocaleString(),
+        x.blank.toLocaleString(),
+        x.comment.toLocaleString(),
+        x.code.toLocaleString()
     ]);
     const allRows = [headerRow, ...otherRows];
     summary.addTable(allRows);
