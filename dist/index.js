@@ -3990,7 +3990,7 @@ async function run() {
     await exec.exec('sudo apt', ['install', '-y', 'cloc']);
     await exec.exec('cloc', ['--vcs=git', '--json', '--out=cloc-output.json']);
     const clocResult = JSON.parse(fs.readFileSync('./cloc-output.json', 'utf8'));
-    const keys = Object.keys(clocResult).filter(x => x != 'header');
+    const keys = Object.keys(clocResult).filter(x => x !== 'header');
     const series = keys.map(key => {
         const metric = clocResult[key];
         return {
@@ -4020,7 +4020,6 @@ async function run() {
     const allRows = [headerRow, ...otherRows];
     summary.addTable(allRows);
     summary.write();
-    const a = 123;
 }
 exports.run = run;
 
