@@ -99510,6 +99510,26 @@ utils.walkdir = function(dirpath, base, callback) {
 
 /***/ }),
 
+/***/ 7461:
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.buildMermaidPieChart = void 0;
+function buildMermaidPieChart(title, stats) {
+    return `pie showData title ${title}
+  ${stats
+        .filter(x => x.language !== 'SUM')
+        .map(x => `    "${x.language}" : ${x.code}`)
+        .join('\n')}
+  `;
+}
+exports.buildMermaidPieChart = buildMermaidPieChart;
+
+
+/***/ }),
+
 /***/ 399:
 /***/ (function(__unused_webpack_module, exports, __nccwpck_require__) {
 
@@ -99544,6 +99564,7 @@ const core = __importStar(__nccwpck_require__(2186));
 const exec = __importStar(__nccwpck_require__(1514));
 const artifact_1 = __nccwpck_require__(9450);
 const fs = __importStar(__nccwpck_require__(7147));
+const chart_1 = __nccwpck_require__(7461);
 async function run() {
     await exec.exec('sudo apt', ['install', '-y', 'cloc']);
     await exec.exec('cloc', ['--vcs=git', '--json', '--out=cloc-output.json']);
@@ -99578,6 +99599,8 @@ async function run() {
     ]);
     const allRows = [headerRow, ...otherRows];
     summary.addTable(allRows);
+    const chart = (0, chart_1.buildMermaidPieChart)('LOC', series);
+    summary.addCodeBlock(chart, 'mermaid');
     summary.write();
     // Upload result as artifact
     const uploadArtifact = core.getBooleanInput('artifact');
