@@ -1,4 +1,4 @@
-## actions-cloc
+# actions-cloc
 
 cloc を GitHub Actions で実行します。
 
