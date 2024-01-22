@@ -33,3 +33,4 @@ Add actions-cloc step to your workflow.
 | - | - | - |
 | artifact | Upload the results as an artifact | `false` |
 | artifact-name | Artifact name | `"cloc-output"` |
+| exclude-lang | Exclude the given comma separated languages from being counted. | N/A |

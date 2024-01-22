@@ -99530,6 +99530,21 @@ exports.buildMermaidPieChart = buildMermaidPieChart;
 
 /***/ }),
 
+/***/ 6733:
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.option = void 0;
+function option(value) {
+    return value === '' ? [value] : [];
+}
+exports.option = option;
+
+
+/***/ }),
+
 /***/ 399:
 /***/ (function(__unused_webpack_module, exports, __nccwpck_require__) {
 
@@ -99565,9 +99580,13 @@ const exec = __importStar(__nccwpck_require__(1514));
 const artifact_1 = __nccwpck_require__(9450);
 const fs = __importStar(__nccwpck_require__(7147));
 const chart_1 = __nccwpck_require__(7461);
+const cli_1 = __nccwpck_require__(6733);
 async function run() {
     await exec.exec('sudo apt', ['install', '-y', 'cloc']);
-    await exec.exec('cloc', ['--vcs=git', '--json', '--out=cloc-output.json']);
+    const commonOptions = ['--vcs=git', '--json', '--out=cloc-output.json'];
+    const excludeLangOption = (0, cli_1.option)(core.getInput('exclude-lang'));
+    const mergedOptions = [...commonOptions, ...excludeLangOption];
+    await exec.exec('cloc', mergedOptions);
     const clocResult = JSON.parse(fs.readFileSync('./cloc-output.json', 'utf8'));
     const keys = Object.keys(clocResult).filter(x => x !== 'header');
     const series = keys.map(key => {
