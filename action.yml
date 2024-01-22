@@ -20,3 +20,6 @@ inputs:
     description: 'Artifact name'
     required: false
     default: cloc-output
+  exclude-lang:
+    description: 'Exclude the given comma separated languages from being counted.'
+    required: false

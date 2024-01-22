@@ -4,10 +4,18 @@ import { DefaultArtifactClient } from '@actions/artifact'
 import { ClocOutput, LanguageStats } from './cloc'
 import * as fs from 'fs'
 import { buildMermaidPieChart } from './chart'
+import { option } from './cli'
 
 export async function run(): Promise<void> {
   await exec.exec('sudo apt', ['install', '-y', 'cloc'])
-  await exec.exec('cloc', ['--vcs=git', '--json', '--out=cloc-output.json'])
+
+  const commonOptions = ['--vcs=git', '--json', '--out=cloc-output.json']
+  const excludeLangOption = option(
+    '--exclude-lang',
+    core.getInput('exclude-lang')
+  )
+  const mergedOptions = [...commonOptions, ...excludeLangOption]
+  await exec.exec('cloc', mergedOptions)
 
   const clocResult = JSON.parse(
     fs.readFileSync('./cloc-output.json', 'utf8')
