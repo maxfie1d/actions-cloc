@@ -10,7 +10,10 @@ export async function run(): Promise<void> {
   await exec.exec('sudo apt', ['install', '-y', 'cloc'])
 
   const commonOptions = ['--vcs=git', '--json', '--out=cloc-output.json']
-  const excludeLangOption = option(core.getInput('exclude-lang'))
+  const excludeLangOption = option(
+    '--exclude-lang',
+    core.getInput('exclude-lang')
+  )
   const mergedOptions = [...commonOptions, ...excludeLangOption]
   await exec.exec('cloc', mergedOptions)
 

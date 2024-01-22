@@ -99537,8 +99537,8 @@ exports.buildMermaidPieChart = buildMermaidPieChart;
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.option = void 0;
-function option(value) {
-    return value === '' ? [value] : [];
+function option(key, value) {
+    return value !== '' ? [`${key}=${value}`] : [];
 }
 exports.option = option;
 
@@ -99584,7 +99584,7 @@ const cli_1 = __nccwpck_require__(6733);
 async function run() {
     await exec.exec('sudo apt', ['install', '-y', 'cloc']);
     const commonOptions = ['--vcs=git', '--json', '--out=cloc-output.json'];
-    const excludeLangOption = (0, cli_1.option)(core.getInput('exclude-lang'));
+    const excludeLangOption = (0, cli_1.option)('--exclude-lang', core.getInput('exclude-lang'));
     const mergedOptions = [...commonOptions, ...excludeLangOption];
     await exec.exec('cloc', mergedOptions);
     const clocResult = JSON.parse(fs.readFileSync('./cloc-output.json', 'utf8'));

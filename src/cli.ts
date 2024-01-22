@@ -1,3 +1,3 @@
-export function option(value: string): string[] {
-  return value === '' ? [value] : []
+export function option(key: string, value: string): string[] {
+  return value !== '' ? [`${key}=${value}`] : []
 }
