@@ -31,4 +31,5 @@ Add actions-cloc step to your workflow.
 
 | Parameter | Description | Default |
 | - | - | - |
-| artifact | Upload the results as an artifact | false |
+| artifact | Upload the results as an artifact | `false` |
+| artifact-name | Artifact name | `"cloc-output"` |

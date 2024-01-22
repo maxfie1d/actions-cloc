@@ -99604,9 +99604,10 @@ async function run() {
     summary.write();
     // Upload result as artifact
     const uploadArtifact = core.getBooleanInput('artifact');
+    const artifactName = core.getInput('artifact-name');
     if (uploadArtifact) {
         const artifact = new artifact_1.DefaultArtifactClient();
-        const { id, size } = await artifact.uploadArtifact('cloc-output', ['./cloc-output.json'], '.');
+        const { id, size } = await artifact.uploadArtifact(artifactName, ['./cloc-output.json'], '.');
         console.log(`Created artifact with id: ${id} (bytes: ${size})`);
     }
 }

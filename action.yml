@@ -16,3 +16,7 @@ inputs:
     description: 'Upload artifact'
     required: false
     default: false
+  artifact-name:
+    description: 'Artifact name'
+    required: false
+    default: cloc-output

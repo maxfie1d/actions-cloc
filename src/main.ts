@@ -52,10 +52,11 @@ export async function run(): Promise<void> {
 
   // Upload result as artifact
   const uploadArtifact = core.getBooleanInput('artifact')
+  const artifactName = core.getInput('artifact-name')
   if (uploadArtifact) {
     const artifact = new DefaultArtifactClient()
     const { id, size } = await artifact.uploadArtifact(
-      'cloc-output',
+      artifactName,
       ['./cloc-output.json'],
       '.'
     )
