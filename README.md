@@ -21,7 +21,7 @@ Add actions-cloc step to your workflow.
 
 ## Features
 
-* Easy step
+* Easy setup
 * The execution time is <10s
 * Pie chart support
 * You can upload the results as an artifact and use it in subsequent steps and jobs
