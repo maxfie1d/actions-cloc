@@ -60,4 +60,4 @@ jobs:
 
       - name: Echo
         run: |
-          echo ${{ steps.test-action.outputs.total }}
+          echo ${{ steps.test-action.outputs.total.code }}
