@@ -57,3 +57,7 @@ jobs:
         with:
           artifact: true
           exclude-lang: JavaScript,JSON
+
+      - name: Echo
+        run: |
+          echo ${{ steps.test-action.outputs.total_code }}
