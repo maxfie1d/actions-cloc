@@ -99629,7 +99629,9 @@ async function run() {
         const { id, size } = await artifact.uploadArtifact(artifactName, ['./cloc-output.json'], '.');
         console.log(`Created artifact with id: ${id} (bytes: ${size})`);
     }
-    core.setOutput('total_code', 100);
+    // Output total
+    const totalCodes = series.find(x => x.language === 'SUM')?.code ?? 0;
+    core.setOutput('total_code', totalCodes);
 }
 exports.run = run;
 
