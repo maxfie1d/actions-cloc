@@ -71,4 +71,6 @@ export async function run(): Promise<void> {
 
     console.log(`Created artifact with id: ${id} (bytes: ${size})`)
   }
+
+  core.setOutput('total', 100)
 }

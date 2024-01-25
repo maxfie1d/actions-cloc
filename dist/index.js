@@ -99629,6 +99629,7 @@ async function run() {
         const { id, size } = await artifact.uploadArtifact(artifactName, ['./cloc-output.json'], '.');
         console.log(`Created artifact with id: ${id} (bytes: ${size})`);
     }
+    core.setOutput('total', 100);
 }
 exports.run = run;
 
