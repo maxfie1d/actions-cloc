@@ -60,4 +60,4 @@ jobs:
 
       - name: Echo
         run: |
-          echo ${{ steps.test-action.outputs.total_code }}
+          echo ${{ steps.test-action.outputs.TypeScript_nFiles }}
