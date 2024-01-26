@@ -99630,8 +99630,14 @@ async function run() {
         console.log(`Created artifact with id: ${id} (bytes: ${size})`);
     }
     // Output total
-    const totalCodes = series.find(x => x.language === 'SUM')?.code ?? 0;
-    core.setOutput('total_code', totalCodes);
+    //const totalCodes = series.find(x => x.language === 'SUM')?.code ?? 0
+    // ループして処理するつもり
+    for (const x of series) {
+        core.setOutput(`${x.language}_nFiles`, x.nFiles);
+        core.setOutput(`${x.language}_blank`, x.blank);
+        core.setOutput(`${x.language}_comment`, x.comment);
+        core.setOutput(`${x.language}_code`, x.code);
+    }
 }
 exports.run = run;
 

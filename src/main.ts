@@ -76,10 +76,10 @@ export async function run(): Promise<void> {
   //const totalCodes = series.find(x => x.language === 'SUM')?.code ?? 0
 
   // ループして処理するつもり
-  series.forEach(x => {
+  for (const x of series) {
     core.setOutput(`${x.language}_nFiles`, x.nFiles)
     core.setOutput(`${x.language}_blank`, x.blank)
     core.setOutput(`${x.language}_comment`, x.comment)
     core.setOutput(`${x.language}_code`, x.code)
-  })
+  }
 }
