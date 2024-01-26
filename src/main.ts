@@ -72,10 +72,7 @@ export async function run(): Promise<void> {
     console.log(`Created artifact with id: ${id} (bytes: ${size})`)
   }
 
-  // Output total
-  //const totalCodes = series.find(x => x.language === 'SUM')?.code ?? 0
-
-  // ループして処理するつもり
+  // Output results
   for (const x of series) {
     core.setOutput(`${x.language}_nFiles`, x.nFiles)
     core.setOutput(`${x.language}_blank`, x.blank)
